@@ -1,0 +1,14 @@
+/*Having como filtro em seleções agrupadas: */
+
+USE sucos_vendas;
+
+SELECT EMBALAGEM, MAX(PRECO_DE_LISTA) AS MAIOR_PRECO, MIN(PRECO_DE_LISTA) AS MENOR_PRECO FROM tabela_de_produtos GROUP BY EMBALAGEM HAVING SUM(PRECO_DE_LISTA) <= 80 AND MAX(PRECO_DE_LISTA);
+
+SELECT 
+    CPF, COUNT(*)
+FROM
+    notas_fiscais
+WHERE
+    YEAR(DATA_VENDA) = 2016
+GROUP BY CPF
+HAVING COUNT(*) > 2000;

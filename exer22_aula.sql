@@ -1,0 +1,18 @@
+/* Formar view */
+
+SELECT EMBALAGEM, MAX(PRECO_DE_LISTA) AS MAIOR_PRECO FROM tabela_de_produtos
+GROUP BY EMBALAGEM;
+
+SELECT X.EMBALAGEM, X.MAIOR_PRECO FROM
+(SELECT EMBALAGEM, MAX(PRECO_DE_LISTA) AS MAIOR_PREÇO FROM tabela_de_produtos
+GROUP BY EMBALAGEM) X WHERE X.MAIOR_PRECO >= 10;
+
+/*Então no lugar de fazer a subconsulta pode-se colocar direto a view*/
+
+SELECT X.EMBALAGEM, X.MAIOR_PRECO FROM
+vw_maiores_embalagens X WHERE X.MAIOR_PRECO >= 10;
+
+SELECT A.NOME_DO_PRODUTO, A.EMBALAGEM, A.PRECO_DE_LISTA, X.MAIOR_PREÇO
+FROM tabela_de_produtos A INNER JOIN vw_maiores_embalagens X
+ON A.EMBALAGEM = X.EMBALAGEM
+
